@@ -1,0 +1,3 @@
+[submodule "nova-covid"]
+	path = nova-covid
+	url = https://github.com/sourcejedi/nova-covid.git

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Be quiet for cron.
+exec >update-log.txt 2>&1
+die() {
+	cat update-log.txt
+	exit 1
+}
+
+cd nova-covid || die
+./fetch.sh || die
+err=0
+
+./split-region.py  || err=1
+./publish-date-2.py  || err=1
+./newly_sick_table.py  || err=1
+
+./changes.py  || err=1
+./jump.py  || err=1
+
+# Skip.  Lots of files (100MB).
+#./prevalence_from_incidence.py &&
+#./check_p_from_i.py  || err=1
+
+[ $err = 0 ] || die
