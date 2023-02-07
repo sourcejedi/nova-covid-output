@@ -12,7 +12,8 @@ cd nova-covid || die
 err=0
 
 ./split-region.py  || err=1
-./publish-date-2.py  || err=1
+./publish-date.py  || err=1
+./publish-date-8.py  || err=1
 ./newly_sick_table.py  || err=1
 
 ./changes.py  || err=1
